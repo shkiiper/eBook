@@ -41,14 +41,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
-    'rest_framework_simplejwt',
     'drf_spectacular',
     'corsheaders',
     'user',
     'celebrity',
     'book',
 ]
-AUTH_USER_MODEL = 'user.User'  # Замените 'myapp' на имя вашего приложения, содержащего модель пользователя
+# AUTH_USER_MODEL = 'user.User'  # Замените 'myapp' на имя вашего приложения, содержащего модель пользователя
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",

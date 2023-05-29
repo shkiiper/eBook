@@ -22,8 +22,8 @@ urlpatterns = [
     path("server/", include("book.urls"), name="books_base_API"),
     path("server/", include("celebrity.urls"), name="celebrity_base_API"),
     path("server/", include("user.urls"), name="users_base_API"),
-    path("server/auth/login/", TokenObtainPairView.as_view(), name="token_create"),
-    path("server/auth/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # path("server/auth/login/", TokenObtainPairView.as_view(), name="token_create"),
+    # path("server/auth/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 
 
 ]
