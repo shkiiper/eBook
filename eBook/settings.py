@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'celebrity',
     'book',
 ]
-# AUTH_USER_MODEL = 'user.User'  # Замените 'myapp' на имя вашего приложения, содержащего модель пользователя
+AUTH_USER_MODEL = 'user.User'  # Замените 'myapp' на имя вашего приложения, содержащего модель пользователя
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
