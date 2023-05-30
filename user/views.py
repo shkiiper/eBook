@@ -21,19 +21,29 @@ class UserViewSet(viewsets.ModelViewSet):
 class TokenObtainPairView(APIView):
     permission_classes = [AllowAny]
 
+    def get_extra_actions(self):
+        return []
+
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
-
-        # Проверка учетных данных пользователя и генерация токенов
-        # Это простой пример, и вам может потребоваться дополнительная логика для проверки учетных данных.
-        # Пожалуйста, адаптируйте этот код к своим потребностям.
 
         user = authenticate(username=username, password=password)
         if user is not None:
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
             refresh_token = str(refresh)
-            return Response({'access_token': access_token, 'refresh_token': refresh_token})
+
+            # Создайте экземпляр сериализатора и передайте пользователя для сериализации
+            serializer = UserSerializer(user)
+            user_data = serializer.data
+
+            # Добавьте данные пользователя к ответу
+            response_data = {
+                'access_token': access_token,
+                'refresh_token': refresh_token,
+                'user': user_data
+            }
+            return Response(response_data)
         else:
             return Response({'error': 'Invalid credentials'}, status=400)

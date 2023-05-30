@@ -1,15 +1,11 @@
-from django.urls import path
-from rest_framework import routers
-from .views import TokenObtainPairView
-from .views import UserViewSet
+from django.urls import include, path
+from rest_framework.routers import SimpleRouter
+from .views import UserViewSet, TokenObtainPairView
 
-router = routers.DefaultRouter()
-router.register('users', UserViewSet, basename='users')
+router = SimpleRouter()
+router.register('users', UserViewSet, basename='user')
 
 urlpatterns = [
-    # ... другие URL-шаблоны вашего приложения ...
-    path('api/token/', TokenObtainPairView, name='api-token'),  # URL для получения токена аутентификации
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 
 ]
-
-urlpatterns += router.urls
