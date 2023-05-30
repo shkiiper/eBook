@@ -8,9 +8,9 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
 )
+from user.views import TokenObtainPairView
 
 urlpatterns = [
     # swagger
