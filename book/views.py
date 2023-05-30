@@ -1,7 +1,5 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
-
-# from book.permissions import IsAuthorOrReadOnly, IsAuthorOrReadOnlyForBookPages
 from .models import Book, Page
 from .serializers import BookSerializer, PageSerializer
 

@@ -11,9 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-@s)fes2*5bx#(2y)_p)k(a5_iwgx7apv-0ou7tk)_!6c64q6#j"
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Замените этот URL на фактический домен вашего интерфейса пользователя
-]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_HEADERS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -33,12 +31,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     'drf_spectacular',
-    'corsheaders',
     'user',
     'celebrity',
     'book',
+    "corsheaders",
 ]
-AUTH_USER_MODEL = 'user.User'  # Замените 'myapp' на имя вашего приложения, содержащего модель пользователя
+
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -70,6 +68,22 @@ TEMPLATES = [
     },
 ]
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'debug': True,  # включить вывод отладочной информации
+}
+
 WSGI_APPLICATION = "eBook.wsgi.application"
 
 # Database
@@ -100,25 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
-
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
-    'debug': True,  # включить вывод отладочной информации
-}
-
-# SIMPLE_JWT = {
-#     'AUTH_HEADER_TYPES': ('JWT',),
-# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

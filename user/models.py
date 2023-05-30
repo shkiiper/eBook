@@ -28,9 +28,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
-
-
-@receiver(post_save, sender=User)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created and instance.is_author:
-        Token.objects.create(user=instance)
