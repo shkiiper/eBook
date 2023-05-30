@@ -12,8 +12,16 @@ SECRET_KEY = "django-insecure-@s)fes2*5bx#(2y)_p)k(a5_iwgx7apv-0ou7tk)_!6c64q6#j
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = ['*']
+# CORS_ALLOW_HEADERS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Content-Type',
+]
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -68,12 +76,11 @@ TEMPLATES = [
     },
 ]
 
-
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -81,8 +88,19 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
-    'debug': True,  # включить вывод отладочной информации
 }
+
+
+# Настройки для JWT-токенов
+from datetime import timedelta
+
+# Установите время истечения токена, если требуется
+# Например, 1 день
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+
 
 WSGI_APPLICATION = "eBook.wsgi.application"
 
@@ -95,6 +113,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+AUTH_USER_MODEL = 'user.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
