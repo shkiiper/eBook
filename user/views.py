@@ -6,7 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, AuthUserSerializer
 
 User = get_user_model()
 
@@ -35,7 +35,7 @@ class TokenObtainPairView(APIView):
             refresh_token = str(refresh)
 
             # Создайте экземпляр сериализатора и передайте пользователя для сериализации
-            serializer = UserSerializer(user)
+            serializer = AuthUserSerializer(user)
             user_data = serializer.data
 
             # Добавьте данные пользователя к ответу
