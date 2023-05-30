@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework import routers
-from views import TokenObtainPairView
+from .views import TokenObtainPairView
 from .views import UserViewSet
 
 router = routers.DefaultRouter()
