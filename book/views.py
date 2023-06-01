@@ -28,7 +28,7 @@ class BookViewSet(ViewSet):
             pages = Page.objects.filter(book=book)
             serializer = BookSerializer(book)
             data = serializer.data
-            data['pages'] = [{'chapter': page.chapter, 'content': page.content} for page in pages]
+            data['pages'] = [{'id': page.id, 'chapter': page.chapter, 'content': page.content, 'book': page.book} for page in pages]
             return Response(data)
         except Book.DoesNotExist:
             return Response(
