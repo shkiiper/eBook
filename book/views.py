@@ -22,13 +22,15 @@ class PageViewSet(viewsets.ModelViewSet):
 
 class BookViewSet(ViewSet):
     permission_classes = [AllowAny]
+
     def retrieve(self, request, pk=None):
         try:
             book = Book.objects.get(id=pk)
             pages = Page.objects.filter(book=book)
             serializer = BookSerializer(book)
             data = serializer.data
-            data['pages'] = [{'id': page.id, 'chapter': page.chapter, 'content': page.content, 'book': page.book} for page in pages]
+            data['pages'] = [{'id': page.id, 'chapter': page.chapter, 'content': page.content} for
+                             page in pages]
             return Response(data)
         except Book.DoesNotExist:
             return Response(
