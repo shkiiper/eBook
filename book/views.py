@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.views import View
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from .models import Book, Page
@@ -18,15 +19,14 @@ class PageViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
 
 
-class BookDetailView:
+class BookDetailView(View):
     def get(self, request, book_id):
         book = get_object_or_404(Book, pk=book_id)
         pages = Page.objects.filter(book=book).values()
 
         return JsonResponse({'book': book.__dict__, 'pages': list(pages)})
 
-
-class PageDetailView:
+class PageDetailView(View):
     def get(self, request, book_id, page_id):
         book = get_object_or_404(Book, pk=book_id)
         page = get_object_or_404(Page, pk=page_id, book=book)
