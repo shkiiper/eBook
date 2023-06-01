@@ -1,4 +1,4 @@
-#!/Users/max/Desktop/eBook/myenv/bin/python3
+#!/Users/user/Desktop/eBook/myenv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

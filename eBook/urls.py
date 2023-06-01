@@ -23,13 +23,13 @@ urlpatterns = [
         name="swagger-ui",
     ),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
     path("admin/", admin.site.urls),
     path("server/", include("book.urls"), name="books_base_API"),
     path("server/", include("celebrity.urls"), name="celebrity_base_API"),
     path("server/", include("user.urls"), name="users_base_API"),
     path('server/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('server/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
 
 ]
 if settings.DEBUG:
