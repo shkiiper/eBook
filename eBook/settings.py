@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'book',
     "corsheaders",
 ]
-
+#fdsaf
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
